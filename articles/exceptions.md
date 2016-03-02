@@ -6,6 +6,7 @@ published: true
 
 
 
-#todo..
-
+todo..
+For an example see:
+[Logging](logging.html)
 

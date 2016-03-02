@@ -12,22 +12,22 @@ The DOAG PL/SQL Conventions are from the community for the community...
 
 ## Table of contents
 
-[Naming conventions](namingconventions.html)
+[Naming conventions](articles/namingconventions.html)
 
-[Tables (Trigger, views, format)]( tables.html)
+[Tables (Trigger, views, format)]( articles/tables.html)
 
-[PL/SQL General](plsqlgeneral.html)
+[PL/SQL General](articles/plsqlgeneral.html)
 
-[Exception Handling](exceptions.html)
+[Exception Handling](articles/exceptions.html)
 
-[Logging](logging.html)
+[Logging](articles/logging.html)
 
-[Code dokumentation](codedocs.html)
+[Code dokumentation](articles/codedocs.html)
 
-[Code commentaries](codecomments.html)
+[Code commentaries](articles/codecomments.html)
 
-[Transaction handling](transactions.html)
+[Transaction handling](articles/transactions.html)
 
-[Performance](performance.html)
+[Performance](articles/performance.html)
 
-[How to use ( mainly for authors )](howto.html)
+[How to use ( mainly for authors )](articles/howto.html)
