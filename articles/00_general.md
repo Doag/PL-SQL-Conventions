@@ -9,9 +9,12 @@ There are separate engines for SQL and PL/SQL in the Oracle Database. In certain
 ## 3. Use bind variables in SQL
 Although it might seem tempting to write something like "SELECT * FROM emp WHERE empno = 10", be aware that this statement has to be parsed each time should empno change. By using a bind variable, the parsed query can be reused, so you better write something like "SELECT * FROM emp WHERE empno = pi_empno"
 
+Full story: http://www.akadia.com/services/ora_bind_variables.html
+
 ## 4. Use bulk operations
 Remember: row-by-row, slow-by-slow. The database was designed to handle bulk data operations, so we better use it whenever possible. For example, forget looping through all rows row-by-row, better use FORALL.
-http://www.oracle.com/technetwork/issue-archive/2012/12-sep/o52plsql-1709862.html
+
+Full story: http://www.oracle.com/technetwork/issue-archive/2012/12-sep/o52plsql-1709862.html
 
 ## 5. Avoid triggers
 A database trigger might seem appealing to use, but try to keep your fingers away from it. It causes a context switch and it executes row-by-row, which we learned not to do. If a trigger is unavoidable, at least make sure that there is no business logic in there and the lines of code are kept small. If possible, use a Table API instead of a trigger.
