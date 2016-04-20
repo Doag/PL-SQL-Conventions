@@ -1,7 +1,7 @@
 # Top 5 list of things you should keep in mind when programming in the Oracle Database
 
 ## 1. Solve your problem in this order: SQL first, then PL/SQL, then Java, then C.
-Using SQL is the fastest way to operate with data in the Oracle Database, followed by PL/SQL. If your problem is not solveable by either SQL nor PL/SQL, try Java or C. If C also is not option, you will have to rethink about your problem. :)
+Using SQL is the fastest way to operate with data in the Oracle Database, followed by PL/SQL. If your problem is not solveable by either SQL nor PL/SQL, try Java or C. If C is also not option, you will have to rethink about your problem. :)
 
 ## 2. Avoid context switches between SQL and PL/SQL
 There are separate engines for SQL and PL/SQL in the Oracle Database. In certain occasions the database will switch from one engine to the other and these switches will cost you performance. For example, if you use a PL/SQL function in the WHERE clause of a SQL statement, the context switch will take place for each row! 
