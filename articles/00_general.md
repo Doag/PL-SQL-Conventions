@@ -7,7 +7,7 @@ Using SQL is the fastest way to operate with data in the Oracle Database, follow
 There are separate engines for SQL and PL/SQL in the Oracle Database. In certain occasions the database will switch from one engine to the other and these switches will cost you performance. For example, if you use a PL/SQL function in the WHERE clause of a SQL statement, the context switch will take place for each row! 
 
 ## 3. Use bind variables in SQL
-Although it might seem tempting to write something like ```sql SELECT * FROM emp WHERE empno = 10 ```, be aware that this statement has to be parsed each time should empno change. By using a bind variable, the parsed query can be reused, so you better write something like "SELECT * FROM emp WHERE empno = pi_empno"
+Although it might seem tempting to write something like ```SELECT * FROM emp WHERE empno = 10```, be aware that this statement has to be parsed each time should empno change. By using a bind variable, the parsed query can be reused, so you better write something like ```SELECT * FROM emp WHERE empno = pi_empno```
 
 Full story: http://www.akadia.com/services/ora_bind_variables.html
 
