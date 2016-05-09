@@ -1,8 +1,3 @@
----
-layout: default
-published: true
----
-
 Code documentation is done within the package body. If done the following way, the documentation can be extracted any time you want (just like with Javadoc). If you want to prevent the extraction, please use ! as seen in this example:
 /*!
  * Internal logging procedure.
