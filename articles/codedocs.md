@@ -1,3 +1,5 @@
+# Code Documentation
+
 Code documentation is done within the package body. If done the following way, the documentation can be extracted any time you want (just like with Javadoc). If you want to prevent the extraction, please use ! instead of * as seen in this example:
 ```
 /*!
