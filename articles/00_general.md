@@ -26,7 +26,7 @@ This is close to the first recommendation but this is to stress it's importance.
 
 Stay informed about the newest development in SQL such as Multi Table Insert, Analytic Functions, Row Pattern Matching or the other possibilities. To write elegant and good performing SQL is the basis for all PL/SQL enhancements that follow. Digging into SQL is not a one time process but requires you to stay informed about latest improvements of new database versions, reading best practices from other SQL developers and getting to know nice SQL tricks that simplify your life.
 
-### Control environment swtches
+### Control environment switches
 
 This is a very important recommendation. Since database version 9, SQL and PL/SQL run in different environments. If you write a loop in PL/SQL and insert data into a table within that loop, the database must switch between the SQL and the PL/SQL environment. This is a tremendous cost factor you should try to avoid if it happens often. There are basically two technologies to avoid unnecessary environment switches:
 
