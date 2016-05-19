@@ -142,6 +142,32 @@ end;
 
 This is especially true if your `select` statement grows in length and complexity. Think about using parameterized cursor to make them even more useful.
 
+## Code Quality
+Code quality refers to things you should implement in a specific way rather than another to get maximum performance and ease of understanding of the resulting code.
+
+### Stick to SQL in SQL and to PL/SQL in PL/SQL
+One general rule is to try and solve a problem in SQL first and then in PL/SQL. But if you are in PL/SQL anyway, changing to SQL to solve a problem incurs an environment switch (or many of them) which we try to avoid. As an example, here's a cool trick to split CSV text into table rows with SQL:
+
+```
+   with val as (
+        select 'A:B:C:D:E' csv
+          from dual)
+ select regexp_substr(csv, '[^:]+', 1, level) t
+   from val
+connect by level <= regexp_count(csv, ':') + 1;
+```
+
+It's very tempting to implement this pattern in a PL/SQL pipelined function. But, as you are in PL/SQL already, it's better to implement it this way:
+
+```
+begin
+  for i in 1 .. regexp_count(p_csv, ':') + 1 loop
+    pipe row(regexp_substr(p_csv, '[^:]+', 1, i));
+  end loop;
+end;
+```
+The same holds true if you change your angle of view: It's very tempting for many programmers to write a little pipelined function to extract text from a csv-column. But here the SQL implementation would be the way to go ...
+
 #### Use global variables carefully
 
 In a package oder package body, variables may be defined at package level. Be careful with these variables, as they keep their value during their whole lifetime (if pragma `serially reusable` is not set, that is). This aspect of global variables may lead to bugs which are hard to find. Plus, if used inflationary, they will sum up in terms of memory consumption, as they will be stored per session. Don't ever used global variables to reduce the amount of parameters you have to pass around between methods and helper methods if you're not absolutely sure that no dangling values may be contained in these global variables.
