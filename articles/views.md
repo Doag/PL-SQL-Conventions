@@ -11,10 +11,10 @@ To make sure that the where clause is respected when doing an update on the view
 create or replace view a00424_p00200_vw
 as
  select emp.emp_name emp_name
-      , dep.dep_name dep_name
-   from employees    emp
-   join departments  dep on (emp.dep_id = dep.dep_id)
-  where upper(dep.dep_name) = 'ACCOUNTING'
-  with check option
-  ;
+ ,      dep.dep_name dep_name
+ from   employees    emp
+ join   departments  dep on (emp.dep_id = dep.dep_id)
+ where  upper(dep.dep_name) = 'ACCOUNTING'
+ with check option
+ ;
 ```
