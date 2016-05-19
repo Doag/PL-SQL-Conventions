@@ -6,10 +6,17 @@ published: true
 # Logging
 
 ## General
- 
-Logger(OraOpenSource) is a PL/SQL logging and debugging framework which was initially created by Tyler Muth and is currently developed by Martin D'Souza. This utillity is recommended for logging in PL/SQL.
+Logging is the process that handles all error related information.
 
-## PL/SQL Procedure / Function Template
+Logging is a balancing act, with clarity vs. completeness and simplicity vs. disk-space as mayor competitors.
+- Clarity for feedback
+- Completeness for analysis
+- Simplicity to make sure that the decision to log or not does eat more performance than the action being logged
+- Disk space wasted by irrelevant log records
+
+Currently the best logging package is [Logger (OraOpenSource)](https://github.com/OraOpenSource/Logger).
+
+## How to use logger
 
 For packages the recommended practice is as follows:
 
@@ -58,7 +65,6 @@ as
 
 end pkg_example;
 ```
-
 
 ## Logger Levels Guide
 Logger supports multiple logging levels. This section will provide an outline of recommended situations for calling each level. The procedures are ordered in most frequently used to least frequently used.
