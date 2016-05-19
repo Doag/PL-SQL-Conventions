@@ -34,6 +34,8 @@ This is a very important recommendation. Since database version 9, SQL and PL/SQ
 - In SQL you want to include PL/SQL function calls in scalar subqueries, if possible [` ... where ename = (select v('P10_ENAME') from dual)`] to reduce the number of environment switches
 - If at all possible, you want to avoid row triggers completely
 
+A database trigger might seem appealing to use, but try to keep your fingers away from it. It causes a context switch and it executes row-by-row, which we learned not to do. If a trigger is unavoidable, at least make sure that there is no business logic in there and the lines of code are kept small. If possible, use a Table API instead of a trigger.
+
 ### Use bind variables
 
 If you create a SQL statement outside the database or dynamically inside PL/SQL, you want to assure that you don't pipe together elements of the query that could be passed in by using bind variables as well. If you have to use dynamic SQL, you can't pass column or table names as bind variables, but you can use bind variables for search criteria and the like. 
@@ -49,9 +51,6 @@ PL/SQL has emerged from a simple macro language to a sophisticated, data oriente
 Doing so, the optimizer inlines helper methods into the code, removing unnecessary method calls, converts `for record in cursor` loops to bulk-optimized loops, restructures your code to remove unnecessary variable assignments and many more. The best is that you don't need to be aware of all the optimizations, it »just happens«!
 
 Full story: http://www.oracle.com/technetwork/issue-archive/2012/12-sep/o52plsql-1709862.html
-
-### Avoid triggers
-A database trigger might seem appealing to use, but try to keep your fingers away from it. It causes a context switch and it executes row-by-row, which we learned not to do. If a trigger is unavoidable, at least make sure that there is no business logic in there and the lines of code are kept small. If possible, use a Table API instead of a trigger.
 
 ### Tell the database about your code
 
@@ -88,15 +87,15 @@ Other important aspects include:
 - Define a pattern for whitespace. You may want to have your clauses left or right bound, upper- or lowercase or whatever else, but define a consistent system for you and your colleagues and make sure that no statement gets committed that does not adhere to these standards. You may want to use a beautifier tool for this is not a strict advice. If you format your code with care, this may be even more readable than an automatically formatted code.
 - Put logical clauses on a new line. It's very easy to overview an additional `and` if it hides in a long row
 - Use brackets to avoid misunderstanding. Even if it's not strictly required, write brackets for your own clarity. This is important especially in the `where` clause when using `and`, `or` and `not` intermixed but also for mathmatical calculations.
-- Do your upmost to format complicated calculations as readable as possible. It will be almost impossible for you after just some days to exactly follow your flow of thoughts if the calculation is not wisely chosen
-- Use comments if required. Comments should be used for points of interest only, not as a basic strategy for each and everything. If used too often, they start tyring the reader and important details will not be read. Avoid jokes and overly long sentences in comments. Simply put: Be precise and professional.
+- Do your upmost to format complicated calculations as readable as possible. It will be almost impossible for you after just some days to exactly follow your flow of thoughts if the formatting is not readable
+- Use comments if required, but only then. Comments should be used for points of interest only, not as a basic strategy for each and everything. If used too often, they start tyring the reader and important details will not be read. Avoid jokes and overly long sentences in comments. Simply put: Be precise and professional.
 
 ### PL/SQL formatting
 In regard to formatting, the same best practices applies than for SQL. But there are some specific points to remember when working in PL/SQL.
 
 #### Keep your methods short
 
-The most important aspect to adds to the rules given for SQL is that your methods shouldn't be too long. In object oriented programming, the goal has been set to not have methods longer than one screen size. You may update your screen now, but the fact remains: If a verbose language like Java sets a goal of one screen page, a compact language like PL/SQL should allow for even shorter methods.
+The most important aspect to adds to the rules given for SQL is that your methods shouldn't be too long. In object oriented programming, the goal has been set to not have methods longer than one screen size. You may want to encrease your screen now, but the fact remains: If a verbose language like Java sets a goal of one screen page, a compact language like PL/SQL should allow for even shorter methods.
 Don't be forced into too long methods because you think that this is faster. If you create helper methods within your code, the compiler will incorporate them into the compiled code if possible (`PLSQL_OPTIMIZE_LEVEL = 2` or greater assumed). Plus, creating helper methods allows for a speaking name. A good chosen helper function name to me is better than a comment that explains what the following code is intended to do. Compare this comment:
 ```
   -- Check whether the username is correct
@@ -117,7 +116,7 @@ Most IDE allow to directly navigate to a helper method and finding a bug is easi
 #### Avoid long SQL in PL/SQL
 Incorporating SQL in PL/SQL feels a bit wrong: You can't develop a statement in PL/SQL, as you can't run it quickly. If you write a lengthy `select` statement in PL/SQL and put constants, bind variables etc into it, it's almost impossible to test it separately. Of course there are many situations where you can't avoid writing SQL in PL/SQL and I don't advocate against doing this at all. But you should take into consideration to remove a long SQL from PL/SQL by storing it in the database as a view and reference that view from within PL/SQL: Views are part of normal PL/SQL code and shouldn't be avoided just to have one selfcontained package.
 
-A very close recommendation to the last I gave is to have explicit `cursor` declarations instead of writing cursor loops with indented select statements. Rather do this:
+A very close recommendation to that one is to have explicit `cursor` declarations instead of writing cursor loops with indented select statements. Rather do this:
 ```
 declare
   cursor table_cur is
@@ -178,4 +177,4 @@ The same recommendation applies to global cursor defined in a package. If you us
 
 #### Prefer *Cursor For Loops* over explicit cursor handling
 
-Times have changed: It might have been advisable in earlier releases of the database to use explicit cursors (declare - open - fetch - close) over *Cursor For Loops*, but these times have passed by. Working with these loops is not only faster (as the compiler implicitly converts them bulk operations) than explicit cursor but more readable as well. So if there is no strong reason for working with explicit cursor (A cursor expression in a `select` statement may be such a reason) then write the short, more elegant and in most cases faster *Cursor For Loop*.
+Times have changed: It might have been advisable in earlier releases of the database to use explicit cursors (`declare - open - fetch - close`) over *Cursor For Loops*, but those times have passed by. Working with Cursor For Loops is not only faster (as the compiler implicitly converts them bulk operations) than explicit cursor but more readable as well. So if there is no strong reason for working with explicit cursor (A `cursor` expression in a `select` statement may be such a reason) then write the short, more elegant and in most cases faster Cursor For Loop.
