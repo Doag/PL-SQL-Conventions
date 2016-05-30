@@ -4,4 +4,4 @@ If you get the feeling that you are writing the same code over and over again, s
 
 Here is a listing of some generators:
 
-[Pipelined Function Generator (http://dickdral.blogspot.de/2016/05/a-generator-for-pipelined-functions.html)
+[Pipelined Function Generator](http://dickdral.blogspot.de/2016/05/a-generator-for-pipelined-functions.html)
