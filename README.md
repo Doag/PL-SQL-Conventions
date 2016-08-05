@@ -1,6 +1,6 @@
 # PL/SQL Conventions
 
-The goal of this DOAG project is to document common best practises for PL/SQL development. It is meant to give you something to think about, with links to get more in-depth information about the subject. It is NOT meant to teach you PL/SQL as such. If you are interested in learning PL/SQL from scratch, have a look at this book: 
+The goal of this DOAG project is to document common best practises for PL/SQL development. It is meant to give you something to think about, with links to get more in-depth information about the subject. It is NOT meant to teach you PL/SQL as such. If you are interested in learning PL/SQL from scratch, start here [PL/SQL Tutorial](http://www.plsqltutorial.com) and then consider buying this book [Oracle PL/SQL Programming by Steven Feuerstein](http://shop.oreilly.com/product/0636920024859.do). Experienced PL/SQL developers often like this book for reference purposes: [Oracle PL/SQL Language Pocket Reference](http://shop.oreilly.com/product/0636920036913.do).
 
 Before learning PL/SQL, you should be familiar with SQL. If you are new to SQL, have a look here: 
 
