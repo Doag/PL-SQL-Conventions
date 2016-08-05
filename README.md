@@ -4,7 +4,7 @@ The goal of this DOAG project is to document common best practises for PL/SQL de
 
 Before learning PL/SQL, you should be familiar with SQL. If you are new to SQL, have a look here: 
 
-http://philip.greenspun.com/sql
+http://philip.greenspun.com/sql and experiment with it here: [Live SQL](http://livesql.oracle.com)
 
 In case you are wondering what the heck I'm talking about, have a look here to get an overview of what a database actually is: 
 
