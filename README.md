@@ -12,7 +12,7 @@ http://allthingsoracle.com/oracle-for-absolute-beginners-part-1-databases
 
 ## How can I contribute to this repository?
 
-You can request edit access to this reqpository through GitHub. After approval, you can edit all pages directly in Github with your web browser. Each page is written using the Markdown notation. Have a look here to get acquainted with this notation: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+You can request edit access to this repository through GitHub. After approval, you can edit all pages directly in Github with your web browser. Each page is written using the Markdown notation. Have a look here to get acquainted with this notation: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 If you are using images in your article, store them in the articles/images folder.
 
