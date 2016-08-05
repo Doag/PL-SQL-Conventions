@@ -1,8 +1,3 @@
----
-layout: default
-published: true
----
-
 # Logging
 
 ## General
