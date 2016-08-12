@@ -4,31 +4,42 @@
 
 ### Create a stub first
 ```
-PACKAGE tb_string_utils
-     IS
-        /* Lots of other, existing programs above. */
-        /* Return substring between start and end locations */
-        FUNCTION betwnstr (
-           string_in IN VARCHAR2
-         , start_in IN PLS_INTEGER
-         , end_in IN PLS_INTEGER
-        )
-           RETURN VARCHAR2;
-     END tb_string_utils;
+CREATE OR REPLACE PACKAGE str_pkg
+IS
+   /* Description 
+   *  Author
+   *  Parameter
+   */
+   PROCEDURE between
+   ( pi_str_in   IN  VARCHAR2
+   , pi_start_in IN  PLS_INTEGER
+   , pi_end_in   IN  PLS_INTEGER
+   , po_str_out  OUT VARCHAR2
+   );
+END str_pkg;
 ```
 Next, I add only the following code to the package body:
 ```
-     PACKAGE BODY tb_string_utils
-     IS
-        /* Lots of other, existing programs above. */
-        /* Return substring between start and end locations */
-        FUNCTION betwnstr (
-           string_in IN VARCHAR2
-         , start_in IN PLS_INTEGER
-         , end_in IN PLS_INTEGER
-        )
-           RETURN VARCHAR2
+CREATE OR REPLACE PACKAGE BODY str_pkg
 IS
+   PROCEDURE between
+   ( pi_str_in   IN  VARCHAR2
+   , pi_start_in IN  PLS_INTEGER
+   , pi_end_in   IN  PLS_INTEGER
+   , po_str_out  OUT VARCHAR2
+   )
+   IS
+   BEGIN
+     # Start your work here
+     null;
+   
+   EXCEPTION
+     WHEN OTHERS
+     THEN
+       # use your favorite logger tool here before raising an exception for system errors
+       raise;
+   END between;
+END str_pkg;
 ```
 
 ### Never hardcode system variables
