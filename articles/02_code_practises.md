@@ -3,6 +3,7 @@
 ## Some code practices
 
 ### Create a stub first
+```
 PACKAGE tb_string_utils
      IS
         /* Lots of other, existing programs above. */
@@ -14,7 +15,9 @@ PACKAGE tb_string_utils
         )
            RETURN VARCHAR2;
      END tb_string_utils;
+```
 Next, I add only the following code to the package body:
+```
      PACKAGE BODY tb_string_utils
      IS
         /* Lots of other, existing programs above. */
@@ -26,5 +29,6 @@ Next, I add only the following code to the package body:
         )
            RETURN VARCHAR2
 IS
+```
 
 ### Never hardcode system variables
