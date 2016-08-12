@@ -42,4 +42,7 @@ IS
 END str_pkg;
 ```
 
-### Never hardcode system variables
+### Avoid hardcoding of system variables, IDs and VARCHAR2 length
+- System variables that depend on your environment should never be hardcoded in PL/SQL
+- Columns that end with _ID usually contain technical IDs. Don't hardcode these in your PL/SQL, but use a procedure to get them
+- Make use of %type and %rowtype. (avoid hardcoding the length of a varchar2 column)
