@@ -1,6 +1,7 @@
 # Code Practises
 
-## Create a stub first
+## Creating a package
+All procedures and functions should reside in a package. Here is how a package is typically created: 
 ```
 CREATE OR REPLACE PACKAGE str_pkg
 IS
@@ -128,4 +129,14 @@ loop
   exit when get_activity%notfound;
 end loop;
 close get_activity;
+```
+
+## Getting only a few rows using SQL
+```
+select   prod_id
+,        prod_list_price
+from     sh.products
+order by prod_list_price
+fetch first 5 rows only
+;
 ```
