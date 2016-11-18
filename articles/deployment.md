@@ -17,5 +17,5 @@ exception
 end;
 ```
 
-## Edition-Based Redefinition (EBR)
+## Zero downtime requirement? Use Edition-Based Redefinition (EBR)
 A good starting point for EBR can be found here: https://blogs.oracle.com/plsql-and-ebr/entry/welcome_to_the_pl_sql
