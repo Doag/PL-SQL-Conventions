@@ -102,3 +102,30 @@ begin
   commit;
 end;
 ```
+
+## If you need error handling during the bulk operation, here is an example:
+```
+loop
+  fetch get_activity bulk collect into la_activity_rec limit 500;
+
+  begin
+    forall i in indices of la_activity_rec save exceptions insert into activity3 values la_activity_rec(i);
+
+  exception
+    when others
+    then
+      if sqlcode=-24381
+      then
+        for errno in 1..sql%bulk_exceptions.count
+        loop
+          dbms_output.put_line('Error in record ‘ ||sql%bulk_exceptions(errno).error_index||
+        end loop;
+      else
+        raise;
+      end if;
+  end;
+
+  exit when get_activity%notfound;
+end loop;
+close get_activity;
+```
