@@ -19,3 +19,4 @@ end;
 
 ## Edition-Based Redefinition (EBR)
 TODO
+https://blogs.oracle.com/plsql-and-ebr/entry/welcome_to_the_pl_sql
