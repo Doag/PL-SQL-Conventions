@@ -18,3 +18,17 @@ as
  with check option
  ;
 ```
+
+When you want to reference a table outside an inline view, you need to use the lateral clause:
+
+```
+ select e.ename
+ ,      e.sal
+ ,      avg_sal
+ from   scott.emp e
+ ,      lateral ( select avg(sal)  avg_sal
+                  from   scott.emp e1
+                  where  e.deptno  = e1.deptno
+                )
+ ;
+```
