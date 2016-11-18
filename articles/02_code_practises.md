@@ -45,7 +45,7 @@ END str_pkg;
 - Columns that end with _ID usually contain technical IDs. Don't hardcode these in your PL/SQL, but use a procedure to get them
 - Make use of %type and %rowtype. (avoid hardcoding the length of a varchar2 column)
 
-## When writing dynamic queries, making use of "q" will lead to much more maintainable code:
+## When writing dynamic queries, making use of "q" will lead to much more maintainable code
 ```
 CREATE OR REPLACE PACKAGE BODY query_builder_pkg
 IS
@@ -69,4 +69,36 @@ EXCEPTION
 END dynamic_query;
 
 END query_builder_pkg;
+```
+
+## Bulk operations are a LOT quicker then row by row processing
+```
+declare
+  cursor get_activity
+  is
+    select *
+    from   activity
+    where  id between 1000000 and 1999999; -- 1 million records
+
+  type activity_array is table of get_activity%rowtype;
+
+  la_activity_rec activity_array:= activity_array();
+  ts1             timestamp;
+
+begin
+  ts1:= systimestamp;
+  dbms_output.put_Line ('started at '||ts1); open get_activity;
+ 
+  loop
+    fetch get_activity bulk collect into la_activity_rec limit 500;
+    forall i in indices of la_activity_rec
+      insert into activity2 values la_activity_rec(i);
+    exit when get_activity%notfound;
+  end loop;
+
+  close get_activity;
+
+  dbms_output.put_Line ('fin at '||systimestamp);
+  commit;
+end;
 ```
