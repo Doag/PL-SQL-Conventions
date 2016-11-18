@@ -140,3 +140,21 @@ order by prod_list_price
 fetch first 5 rows only
 ;
 ```
+
+## When using CASE (and you should use it instead of IF!), make sure that there is a ELSE clause
+```
+FUNCTION fruit_translator
+( pi_letter_in IN VARCHAR2
+) RETURN VARCHAR2
+IS
+  retval VARCHAR2(100);
+BEGIN
+  CASE
+    WHEN pi_letter_in = 'A' THEN retval := 'Apple';
+    WHEN pi_letter_in = 'B' THEN retval := 'Banana';
+    ELSE retval:= '';
+  END CASE;
+
+  RETURN retval;
+END fruit_translator;
+```
