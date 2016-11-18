@@ -1,3 +1,9 @@
+# Deployment of PL/SQL
+
+## EBR
+
+## Continue processing even if the object already exists.
+```
 begin
   execute immediate
     'CREATE SEQUENCE SEQ1 INCREMENT BY 1 START WITH 1 MAXVALUE 9999 MINVALUE 1';
@@ -11,3 +17,4 @@ exception
       raise;
     end if;
 end;
+```
