@@ -1,7 +1,5 @@
 # Deployment of PL/SQL
 
-## EBR
-
 ## Continue processing even if the object already exists.
 ```
 begin
@@ -18,3 +16,6 @@ exception
     end if;
 end;
 ```
+
+## Edition-Based Redefinition (EBR)
+TODO
