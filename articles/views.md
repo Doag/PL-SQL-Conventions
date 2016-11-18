@@ -19,7 +19,7 @@ as
  ;
 ```
 
-When you want to reference a table outside an inline view, you need to use the lateral clause:
+When you want to reference a table outside an inline view, you need to use the ```lateral``` clause:
 
 ```
  select e.ename
