@@ -71,7 +71,7 @@ END dynamic_query;
 END query_builder_pkg;
 ```
 
-## Bulk operations are a LOT quicker then row by row processing
+## Keep in mind: bulk operations are a LOT quicker then row-by-row processing
 ```
 declare
   cursor get_activity
