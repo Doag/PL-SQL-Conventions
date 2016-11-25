@@ -1,6 +1,6 @@
 # Deployment of PL/SQL
 
-## Continue processing even if the object already exists. Explicitly check if the object already exists and don't just try the execute a certain statement.
+## Continue processing even if the object already exists. Explicitly check if the object already exists and don't just try to execute a certain statement.
 ```
 begin
   select count(1)
