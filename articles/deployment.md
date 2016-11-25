@@ -1,19 +1,26 @@
 # Deployment of PL/SQL
 
-## Continue processing even if the object already exists.
+## Continue processing even if the object already exists. Explicitly check if the object already exists and don't just try the execute a certain statement.
 ```
 begin
-  execute immediate
-    'CREATE SEQUENCE SEQ1 INCREMENT BY 1 START WITH 1 MAXVALUE 9999 MINVALUE 1';
+  select count(1)
+  from   user_indexes
+  where  t.table_name = c_table
+  and    i.index_name = c_index_name
+  ;
+
+  if l_count = 0
+  then
+    execute immediate ('CREATE...');
+    dbms_output.put_line('INFO:' || ' was executed');
+  else
+    dbms_output.put_line('WARNING: ' || c_action || ' already executed');
+  end if;
 
 exception
   when others
   then
-    if sqlcode = -955 then
-      null;
-    else
-      raise;
-    end if;
+    dbms_output.put_line('ERROR: ' || c_action || ' raised an error');
 end;
 ```
 
