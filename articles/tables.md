@@ -36,14 +36,14 @@
 -	there can be one or more UKs per table
 -	best practice: ```every table with a surrogate PK must have at least one UK!```
 -	best practice: try to use as many UKs as possible – they increase the quality of data
--	best practice: for big tables keep in mind – every UK slows down the performance of  DML Operations
+-	best practice: for big tables keep in mind – every UK slows down the performance of  DML operations
 
 ###	Foreign Key (FK) Columns:
 -	connects records of a table with records of other tables 
 -	both tables in a FK relation can also be the same table (self-reference FK)
 -	best practice: ```try to use as many FKs as possible – they increase the quality of data```
--	best practice: for big tables keep in mind – every FK slows down the performance of DML Operations
--	best practice: be careful with self-reference FKs – DML Operations, especially deletes can get very complex
+-	best practice: for big tables keep in mind – every FK slows down the performance of DML operations
+-	best practice: be careful with self-reference FKs – DML operations, especially deletes can get very complex
 -	good practice: use the PK of the foreign table in foreign key definition
 
 ###	Data Columns
@@ -57,6 +57,3 @@
 -	special columns, for example user_created to store the information which RDBMS-user has created this record
 -	provided in the background
 -	values are generated automatically instead of user input 
-
-## Table creation
-- Always create VARCHAR2 columns with CHAR: psn_first_name(varchar2 200 char)
