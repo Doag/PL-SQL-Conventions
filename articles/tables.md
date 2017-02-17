@@ -10,8 +10,8 @@
 -	best practice: consider the normalization rules when modeling tables!
 -	best practice: try to avoid dependencies between the records of a table
 -	best practice: create exact one table per entity of information. Example:
-- all relevant information of a person ( birth_date, name, … ) should be places into one table persons and not in some diverse tables
-- an table with information of persons and they orders should be divided into two tables persons and orders
+  - all relevant information of a person ( birth_date, name, … ) should be places into one table persons and not in some diverse tables
+  - an table with information of persons and they orders should be divided into two tables persons and orders
 -	best practice: tables with several hundreds of columns are terrible in handling – try to keep the number of columns as small as possible
 -	best practice: use always column names in SQL-Statements! A single SELECT * FROM … can be a ticking bomb which explodes after adding a new column to the table persons.
 -	best practice: it is easy to add a new column to a table (see above), but it can be a horror to drop a column (and keep the system running after that)
