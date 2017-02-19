@@ -20,18 +20,20 @@
 
 ###	Primary Key (PK) Columns:
 -	the value of the PK identifies a record – it must be unique for all records of the table
--	only one PK pro table
--	can be built up of one or more columns
+-	only one PK per table
+-	can be built up of one or more columns (composite key)
+- composite keys should have as few columns as possible - each additional column makes the key ineffective
 -	the value of a PK should not depend from other data columns
--	the value of a PK should not be changed after once created
+-	once created the value of a PK should not be changed
 - best practice: ```every table should have a PK!```
 - best practice: PK columns are always NOT NULL
 -	best practice: a surrogated PK, an extra single number column provided from a sequence with only one role – to build the PK, for example: id INT NOT NULL PRIMARY KEY 
 
 ###	Unique Key (UK) Columns:
 -	UK is similar to the PK - the value of the UK identifies a record
--	Unlike the PK it is OK, if the value of the UK changes – the old and the new value must always be unique for all records of the table
--	can be built up of one or more data columns
+-	Unlike the PK it is not problematic, if the value of the UK changes – the old and the new value must be unique for all records of the table
+-	can be built up of one or more columns (composite key)
+- composite keys should have as few columns as possible - each additional column makes the key ineffective
 -	UK is optional
 -	there can be one or more UKs per table
 -	best practice: ```every table with a surrogate PK must have at least one UK!```
@@ -44,14 +46,14 @@
 -	best practice: ```try to use as many FKs as possible – they increase the quality of data```
 -	best practice: for big tables keep in mind – every FK slows down the performance of DML operations
 -	best practice: be careful with self-reference FKs – DML operations, especially deletes can get very complex
--	good practice: use the PK of the foreign table in foreign key definition
+-	best practice: use the PK of the foreign table in foreign key definition
 
 ###	Data Columns
 -	net data
 -	builds the core of the information of every record
 -	are used in UKs, sometimes also in PKs and FKs
--	the value of a data columns should not depend of values of other columns 
--	best practice: ```use always the accurate data type for every column! For example always create VARCHAR2 columns with CHAR: psn_first_name(varchar2 200 char)```
+-	the value of a data columns should not depend on values of other columns 
+-	best practice: ```always use the accurate data type for every column! For example always create VARCHAR2 columns with CHAR: psn_first_name(varchar2 200 char)```
 
 ###	Other Columns
 -	special columns, for example user_created to store the information which RDBMS-user has created this record
