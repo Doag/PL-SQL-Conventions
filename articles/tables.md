@@ -45,7 +45,7 @@
 -	both tables in a FK relation can also be the same table (self-reference FK)
 -	best practice: ```try to use as many FKs as possible – they increase the quality of data```
 -	best practice: for big tables keep in mind – every FK slows down the performance of DML operations
--	best practice: be careful with self-reference FKs – DML operations, especially deletes can get very complex
+-	best practice: be careful with self-reference FKs – DML operations, especially deletes, can get very complex
 -	best practice: use the PK of the foreign table in foreign key definition
 
 ###	Data Columns
