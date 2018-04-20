@@ -2,8 +2,9 @@
 
 Best practices center around different scopes:
 - Performance
-- Readablility
-- Code Qualility
+- Readability
+- Code Quality
+- Testability
 
 ## Performance
 
@@ -12,11 +13,11 @@ The following best practices are ordered by importance.
 ### Try to solve a problem in SQL first
 
 Solve your problem in this order: SQL first, then PL/SQL, then Java, then C.
-Using SQL is the fastest way to operate with data in the Oracle Database, followed by PL/SQL. If your problem is not solveable by either SQL nor PL/SQL, try Java or C. If C is also not option, you will have to rethink about your problem. :)
+Using SQL is the fastest way to operate with data in the Oracle Database, followed by PL/SQL. If your problem is not solveable by either SQL nor PL/SQL, try Java or C. If C is also not option, you will have to rethink your problem. :)
 
 Solving problems in SQL does not mean to write complicated SQL rather than simple PL/SQL stored procedures, but to elaborate on SQL and utilize it's power and versatility. In most of the cases, if not any, it's easier, shorter and faster to have the database collect the data you require than to do it yourself.
 
-Another point to remember is: Tell the database as precisely and completly as you can which data you need. It's by far better to write a Top-N-Analysis with an analytic function or the new Row Limiting Clause in version 12c than to simply order your data and only fetch the first N rows and discard the cursor. The more the database knows about the data you want, the more the database will do for you.
+Another point to remember is: Tell the database as precisely and completely as you can which data you need. It's by far better to write a Top-N-Analysis with an analytic function or the new Row Limiting Clause in version 12c than to simply order your data and only fetch the first N rows and discard the cursor. The more the database knows about the data you want, the more the database will do for you.
 
 Put the other way round, it reads: The less you tell the database about the data you require, the more you're on your own in regard to performance tuning. If you dig into it, you won't believe how smart the optimizer is in supporting you, should you give it a chance.
 
@@ -46,7 +47,7 @@ Full story: http://www.akadia.com/services/ora_bind_variables.html
 
 ### Let the database help you
 
-PL/SQL has emerged from a simple macro language to a sophisticated, data oriented programming language. Version 11g brought an all new optimizer with many options you should utilize in your code. Let the database help you means: let the compiler help you optimize your code. This can be achieved by switching the `PLSQL_OPTIMIZE_LEVEL` flag to it's maximum value (which is 3 in Version 12c). 
+PL/SQL has emerged from a simple macro language to a sophisticated, data oriented programming language. Version 11g brought an all new optimizer with many options you should utilize in your code. Letting the database help you means: let the compiler help you optimize your code. This can be achieved by switching the `PLSQL_OPTIMIZE_LEVEL` flag to it's maximum value (which is 3 in Version 12c). 
 
 Doing so, the optimizer inlines helper methods into the code, removing unnecessary method calls, converts `for record in cursor` loops to bulk-optimized loops, restructures your code to remove unnecessary variable assignments and many more. The best is that you don't need to be aware of all the optimizations, it »just happens«!
 
@@ -86,16 +87,16 @@ Other important aspects include:
 - Decide whether your key words shall be uppercase or lowercase and stick to this convention
 - Define a pattern for whitespace. You may want to have your clauses left or right bound, upper- or lowercase or whatever else, but define a consistent system for you and your colleagues and make sure that no statement gets committed that does not adhere to these standards. You may want to use a beautifier tool for this is not a strict advice. If you format your code with care, this may be even more readable than an automatically formatted code.
 - Put logical clauses on a new line. It's very easy to overview an additional `and` if it hides in a long row
-- Use brackets to avoid misunderstanding. Even if it's not strictly required, write brackets for your own clarity. This is important especially in the `where` clause when using `and`, `or` and `not` intermixed but also for mathmatical calculations.
+- Use brackets to avoid misunderstanding. Even if it's not strictly required, write brackets for your own clarity. This is important especially in the `where` clause when using `and`, `or` and `not` intermixed but also for mathematical calculations.
 - Do your upmost to format complicated calculations as readable as possible. It will be almost impossible for you after just some days to exactly follow your flow of thoughts if the formatting is not readable
-- Use comments if required, but only then. Comments should be used for points of interest only, not as a basic strategy for each and everything. If used too often, they start tyring the reader and important details will not be read. Avoid jokes and overly long sentences in comments. Simply put: Be precise and professional.
+- Use comments if required, but only then. Comments should be used for points of interest only, not as a basic strategy for each and everything. If used too often, they start tiring the reader and important details will not be read. Avoid jokes and overly long sentences in comments. Simply put: Be precise and professional.
 
 ### PL/SQL formatting
 In regard to formatting, the same best practices applies than for SQL. But there are some specific points to remember when working in PL/SQL.
 
 #### Keep your methods short
 
-The most important aspect to adds to the rules given for SQL is that your methods shouldn't be too long. In object oriented programming, the goal has been set to not have methods longer than one screen size. You may want to encrease your screen now, but the fact remains: If a verbose language like Java sets a goal of one screen page, a compact language like PL/SQL should allow for even shorter methods.
+The most important aspect to add to the rules given for SQL is that your methods shouldn't be too long. In object oriented programming, the goal has been set to not have methods longer than one screen size. You may want to encrease your screen now, but the fact remains: If a verbose language like Java sets a goal of one screen page, a compact language like PL/SQL should allow for even shorter methods.
 Don't be forced into too long methods because you think that this is faster. If you create helper methods within your code, the compiler will incorporate them into the compiled code if possible (`PLSQL_OPTIMIZE_LEVEL = 2` or greater assumed). Plus, creating helper methods allows for a speaking name. A good chosen helper function name to me is better than a comment that explains what the following code is intended to do. Compare this comment:
 ```
   -- Check whether the username is correct
@@ -171,10 +172,12 @@ The same holds true if you change your angle of view: It's very tempting for man
 
 In a package oder package body, variables may be defined at package level. Be careful with these variables, as they keep their value during their whole lifetime (if pragma `serially reusable` is not set, that is). This aspect of global variables may lead to bugs which are hard to find. Plus, if used inflationary, they will sum up in terms of memory consumption, as they will be stored per session. Don't ever used global variables to reduce the amount of parameters you have to pass around between methods and helper methods if you're not absolutely sure that no dangling values may be contained in these global variables.
 
+Another reason to avoid global variables is that they make testing more complicated. If you expose a procedure or function for testing, you must make sure that no global variable is used, except when it is initialized _deterministically_ or in that procedure or function itself. Otherwise your tests could give different results just by starting them in a different sequence.
+
 Don't use global variables or constants at package specification level directly. If a constant value needs to be changed later, it will force all packages referencing this package to recompile as well. Plus, a constant in a package is not accessible from SQL, as SQL is not aware of variables. Consider creating getter functions for a constant or store constants within database tables if you require them from within SQL. Alternatively, you may define constants as global variables and set their value during package initialization but in this case you loose their constant behaviour.
 
-The same recommendation applies to global cursor defined in a package. If you use them at all, make sure that you close them afterwards. Global cursor remain open for the whole lifetime of the package, just as any other global variable will do, consuming loads of memory if not carefully closed after usage.
+The same recommendation applies to any global cursor defined in a package. If you use them at all, make sure that you close them afterwards. Global cursors remain open for the whole lifetime of the package, just as any other global variable will do, consuming loads of memory if not carefully closed after usage.
 
 #### Prefer *Cursor For Loops* over explicit cursor handling
 
-Times have changed: It might have been advisable in earlier releases of the database to use explicit cursors (`declare - open - fetch - close`) over *Cursor For Loops*, but those times have passed by. Working with Cursor For Loops is not only faster (as the compiler implicitly converts them bulk operations) than explicit cursor but more readable as well. So if there is no strong reason for working with explicit cursor (A `cursor` expression in a `select` statement may be such a reason) then write the short, more elegant and in most cases faster Cursor For Loop.
+Times have changed: It might have been advisable in earlier releases of the database to use explicit cursors (`declare - open - fetch - close`) over *Cursor For Loops*, but those times have passed by. Working with Cursor For Loops is not only faster (as the compiler implicitly converts them bulk operations) than explicit cursor but more readable as well. So if there is no strong reason for working with explicit cursors (A `cursor` expression in a `select` statement may be such a reason) then write the short, more elegant and in most cases faster Cursor For Loop.
