@@ -22,6 +22,7 @@ If you like, you can also create a local copy of all files and work with your fa
 -  [Handling Exceptions](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/exceptions.md)
 -  [Logging](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/logging.md)
 -  [Naming Conventions](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/namingconventions.md)
+-  [Structured Testing](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/structured_testing.md)
 -  [Tables](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/tables.md)
 -  [Views](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/views.md)
 
