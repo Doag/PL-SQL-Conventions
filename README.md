@@ -25,8 +25,12 @@ If you like, you can also create a local copy of all files and work with your fa
 -  [Naming Conventions](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/namingconventions.md)
 -  [Structured Testing](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/structured_testing.md)
 - [Code Generators](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/generators.md)
+
 ### SQL Pages
 -  [Tables](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/tables.md)
 -  [Views](https://github.com/Doag/PL-SQL-Conventions/blob/master/articles/views.md)
+
+### Related Resources
+-  [Trivadis PL/SQL &amp; SQL Coding Guidelines](https://github.com/Trivadis/plsql-and-sql-coding-guidelines)
 
 If you added or completed another page, feel free to add it here.
