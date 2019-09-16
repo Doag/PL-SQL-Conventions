@@ -25,4 +25,4 @@ end;
 ```
 
 ## Zero downtime requirement? Use Edition-Based Redefinition (EBR)
-A good starting point for EBR can be found here: https://blogs.oracle.com/plsql-and-ebr/entry/welcome_to_the_pl_sql
+A good starting point for EBR can be found here: http://bit.ly/oracledb_ebr
