@@ -86,7 +86,7 @@ In SQL, any clause belongs to a new line. Avoid long rows with all clauses just 
 Other important aspects include:
 - Decide whether your key words shall be uppercase or lowercase and stick to this convention
 - Define a pattern for whitespace. You may want to have your clauses left or right bound, upper- or lowercase or whatever else, but define a consistent system for you and your colleagues and make sure that no statement gets committed that does not adhere to these standards. You may want to use a beautifier tool for this is not a strict advice. If you format your code with care, this may be even more readable than an automatically formatted code.
-- Put logical clauses on a new line. It's very easy to overview an additional `and` if it hides in a long row
+- Put logical clauses on a new line. It's very easy to overlook an additional `and` if it hides in a long row
 - Use brackets to avoid misunderstanding. Even if it's not strictly required, write brackets for your own clarity. This is important especially in the `where` clause when using `and`, `or` and `not` intermixed but also for mathematical calculations.
 - Do your upmost to format complicated calculations as readable as possible. It will be almost impossible for you after just some days to exactly follow your flow of thoughts if the formatting is not readable
 - Use comments if required, but only then. Comments should be used for points of interest only, not as a basic strategy for each and everything. If used too often, they start tiring the reader and important details will not be read. Avoid jokes and overly long sentences in comments. Simply put: Be precise and professional.
